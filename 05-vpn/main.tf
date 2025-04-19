@@ -1,8 +1,8 @@
 resource "aws_key_pair" "vpn" {
   key_name   = "vpn"
   # you can paste the public key directly like this
-  #public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6ONJth+DzeXbU3oGATxjVmoRjPepdl7sBuPzzQT2Nc sivak@BOOK-I6CR3LQ85Q"
-  public_key = file("~/.ssh/openvpn.pub")
+  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJJx/tR9Iby5e+4dJT0aEtrse0Jou4uziDf0Zw2pTjxR puttiswamy123@gmail.com"
+  #public_key = file("~/.ssh/openvpn.pub")
   # ~ means windows home directory
 }
 
