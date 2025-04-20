@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket         = "swamy-jenkins"
-    key            = "jenkins-test-vpn"
+    key            = "jenkins-vpn-test1"
     region         = "us-east-1"
     dynamodb_table = "swamy-locking"
   }
