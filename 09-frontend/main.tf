@@ -26,7 +26,7 @@ resource "null_resource" "frontend" {
     connection {
         type     = "ssh"
         user     = "ec2-user"
-        password = "DevOps321"
+        private_key = file("C:/Users/SAMSUNG/.ssh/id_ed25519_pswamy1234")
         host     = module.frontend.public_ip 
     }
 
