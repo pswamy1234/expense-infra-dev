@@ -6,8 +6,8 @@ module "frontend" {
   vpc_security_group_ids = [data.aws_ssm_parameter.frontend_sg_id.value]
   # convert StringList to list and get first element
   subnet_id = local.public_subnet_id
-  ami = data.aws_ami.ami_info.id
-  associate_public_ip_address = true  # 👈 Add this line
+  ami = data.aws_ami.ami_info.id 
+  key_name               = "pswamy1234" 
   
   tags = merge(
     var.common_tags,
@@ -26,7 +26,8 @@ resource "null_resource" "frontend" {
     connection {
         type     = "ssh"
         user     = "ec2-user"
-        private_key = file("C:/Users/SAMSUNG/.ssh/id_ed25519_pswamy1234")
+        password = "DevOps321"
+        #private_key = file("C:/Users/SAMSUNG/.ssh/id_ed25519_pswamy1234")
         host     = module.frontend.public_ip 
     }
 
