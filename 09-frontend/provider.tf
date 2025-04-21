@@ -11,7 +11,7 @@ terraform {
     region         = "us-east-1"
     dynamodb_table = "swamy-locking"
   }
-
+}
 #provide authentication here
 provider "aws" {
   region = "us-east-1"
