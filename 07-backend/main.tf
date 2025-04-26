@@ -27,6 +27,7 @@ resource "null_resource" "backend" {
         user     = "ec2-user"
         password = "DevOps321"
         host     = module.backend.public_ip
+        timeout  = "10m"
     }
 
     provisioner "file" {
@@ -64,7 +65,8 @@ resource "null_resource" "backend_delete" {
         type     = "ssh"
         user     = "ec2-user"
         password = "DevOps321"
-        host     = module.backend.private_ip
+        host     = module.backend.public_ip
+        timeout  = "10m"
     }
 
     provisioner "local-exec" {
