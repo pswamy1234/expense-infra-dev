@@ -1,3 +1,16 @@
+resource "aws_db_subnet_group" "expense" {
+  name       = "${var.project_name}-${var.environment}" # expense-dev
+  subnet_ids = split(",", data.aws_ssm_parameter.private_subnet_ids.value)  # Assuming your private subnet IDs are stored as comma-separated string in SSM
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${var.project_name}-${var.environment}"
+    }
+  )
+}
+
+
 module "db" {
   source = "terraform-aws-modules/rds/aws"
   identifier = "${var.project_name}-${var.environment}" #expense-dev
@@ -14,7 +27,7 @@ module "db" {
   vpc_security_group_ids = [data.aws_ssm_parameter.db_sg_id.value]  
 
   # DB subnet group
-  db_subnet_group_name = data.aws_ssm_parameter.db_subnet_group_name.value
+  db_subnet_group_name = aws_db_subnet_group.expense.name
 
   # DB parameter group
   family = "mysql8.0"
