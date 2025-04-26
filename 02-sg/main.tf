@@ -221,7 +221,7 @@ resource "aws_security_group_rule" "backend_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["103.165.8.123/32"]
   security_group_id = module.backend.sg_id
 }
 
