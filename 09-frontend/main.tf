@@ -7,7 +7,7 @@ module "frontend" {
   # convert StringList to list and get first element
   subnet_id = local.public_subnet_id
   ami = data.aws_ami.ami_info.id 
-  key_name               = "pswamy1234" 
+  #key_name               = "pswamy1234" 
   
   tags = merge(
     var.common_tags,
