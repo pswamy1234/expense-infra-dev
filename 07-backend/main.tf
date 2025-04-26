@@ -1,3 +1,4 @@
+
 module "backend" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   name = "${var.project_name}-${var.environment}-${var.common_tags.Component}"
@@ -7,7 +8,7 @@ module "backend" {
   # convert StringList to list and get first element
   subnet_id = local.private_subnet_id
   ami = data.aws_ami.ami_info.id
-  associate_public_ip_address = true  
+  
   tags = merge(
     var.common_tags,
     {
@@ -26,8 +27,7 @@ resource "null_resource" "backend" {
         type     = "ssh"
         user     = "ec2-user"
         password = "DevOps321"
-        host     = module.backend.public_ip
-        timeout  = "10m"
+        host     = module.backend.private_ip
     }
 
     provisioner "file" {
@@ -65,8 +65,7 @@ resource "null_resource" "backend_delete" {
         type     = "ssh"
         user     = "ec2-user"
         password = "DevOps321"
-        host     = module.backend.public_ip
-        timeout  = "10m"
+        host     = module.backend.private_ip
     }
 
     provisioner "local-exec" {
