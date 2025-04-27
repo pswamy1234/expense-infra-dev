@@ -27,8 +27,8 @@ resource "null_resource" "backend" {
     connection {
         type     = "ssh"
         user     = "ec2-user"
-        #password = "DevOps321"
-        private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
+        password = "DevOps321"
+        #private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
         host     = module.backend.private_ip
         timeout = "10m"
     }
@@ -67,8 +67,8 @@ resource "null_resource" "backend_delete" {
     connection {
         type     = "ssh"
         user     = "ec2-user"
-        #password = "DevOps321"
-        private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
+        password = "DevOps321"
+        #private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
         host     = module.backend.private_ip
         timeout = "10m"
     }
