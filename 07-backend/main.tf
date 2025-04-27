@@ -8,6 +8,7 @@ module "backend" {
   # convert StringList to list and get first element
   subnet_id = local.private_subnet_id
   ami = data.aws_ami.ami_info.id
+  key_name = "Swamy"
   
   tags = merge(
     var.common_tags,
@@ -26,7 +27,8 @@ resource "null_resource" "backend" {
     connection {
         type     = "ssh"
         user     = "ec2-user"
-        password = "DevOps321"
+        #password = "DevOps321"
+        private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
         host     = module.backend.private_ip
         timeout = "10m"
     }
@@ -65,7 +67,8 @@ resource "null_resource" "backend_delete" {
     connection {
         type     = "ssh"
         user     = "ec2-user"
-        password = "DevOps321"
+        #password = "DevOps321"
+        private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
         host     = module.backend.private_ip
         timeout = "10m"
     }
