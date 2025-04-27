@@ -11,5 +11,10 @@ variable "common_tags" {
     Project = "expense"
     Environment = "dev"
     Terraform = "true"
+    Component = "app-alb"
   }
+}
+
+variable "zone_name" {
+  default = "swamy.fun"
 }
