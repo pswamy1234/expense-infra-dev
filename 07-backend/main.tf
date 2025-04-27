@@ -8,7 +8,7 @@ module "backend" {
   # convert StringList to list and get first element
   subnet_id = local.private_subnet_id
   ami = data.aws_ami.ami_info.id
-  key_name = "Swamy"
+  #key_name = "Swamy"
   
   tags = merge(
     var.common_tags,
@@ -19,38 +19,38 @@ module "backend" {
 }
 
 
-# resource "null_resource" "backend" {
-#     triggers = {
-#       instance_id = module.backend.id # this will be triggered everytime instance is created
-#     }
+resource "null_resource" "backend" {
+    triggers = {
+      instance_id = module.backend.id # this will be triggered everytime instance is created
+    }
 
-#     connection {
-#         type     = "ssh"
-#         user     = "ec2-user"
-#         password = "DevOps321"
-#         #private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
-#         host     = module.backend.private_ip
-#         timeout = "10m"
-#     }
+    connection {
+        type     = "ssh"
+        user     = "ec2-user"
+        password = "DevOps321"
+        #private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
+        host     = module.backend.private_ip
+        timeout = "20m"
+    }
 
-#     provisioner "file" {
-#         source      = "${var.common_tags.Component}.sh"
-#         destination = "/tmp/${var.common_tags.Component}.sh"
-#     }
+    provisioner "file" {
+        source      = "${var.common_tags.Component}.sh"
+        destination = "/tmp/${var.common_tags.Component}.sh"
+    }
 
-#     provisioner "remote-exec" {
-#         inline = [
-#             "chmod +x /tmp/${var.common_tags.Component}.sh",
-#             "sudo sh /tmp/${var.common_tags.Component}.sh ${var.common_tags.Component} ${var.environment}"
-#         ]
-#     } 
-# }
+    provisioner "remote-exec" {
+        inline = [
+            "chmod +x /tmp/${var.common_tags.Component}.sh",
+            "sudo sh /tmp/${var.common_tags.Component}.sh ${var.common_tags.Component} ${var.environment}"
+        ]
+    } 
+}
 
 resource "aws_ec2_instance_state" "backend" {
   instance_id = module.backend.id
   state       = "stopped"
   # stop the serever only when null resource provisioning is completed
-  #depends_on = [ null_resource.backend ]
+  depends_on = [ null_resource.backend ]
 }
 
 resource "aws_ami_from_instance" "backend" {
@@ -70,7 +70,7 @@ resource "null_resource" "backend_delete" {
         password = "DevOps321"
         #private_key = file("C:/Users/SAMSUNG/.ssh/Swamy")
         host     = module.backend.private_ip
-        timeout = "10m"
+        timeout = "20m"
     }
 
     provisioner "local-exec" {
